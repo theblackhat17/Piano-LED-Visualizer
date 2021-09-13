@@ -141,6 +141,10 @@ while True:
             timeshift_start = time.time()
     display_cycle += 1
 
+    if (time.time() - midiports.last_activity) > 900:
+        midiports.reconnect_ports()
+        midiports.last_activity = time.time()
+
     if (time.time() - midiports.last_activity) > 1:
         usersettings.save_changes()
         if usersettings.pending_reset:
