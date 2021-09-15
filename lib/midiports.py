@@ -65,11 +65,13 @@ class MidiPorts:
 
     def reconnect_ports(self):
         try:
+            self.inport.close()
             port = self.usersettings.get_setting_value("input_port")
             self.inport = mido.open_input(port)
         except:
             print("Can't reconnect input port: " + port)
         try:
+            self.playport.close()
             port = self.usersettings.get_setting_value("play_port")
             self.playport = mido.open_output(port)
         except:
